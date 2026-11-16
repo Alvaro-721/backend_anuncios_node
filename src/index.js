@@ -1,8 +1,10 @@
 const express = require("express");
-
+var cors = require('cors')
 const router = require("./router");
 
 const app = express();
+
+app.use(cors())
 const PORT = process.env.PORT || 3000;
 
 // Middleware para interpretar el JSON del body
