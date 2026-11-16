@@ -1,0 +1,84 @@
+@base = http://127.0.0.1:3000/api
+
+### Listar todas las publicaciones (200)
+GET {{base}}/publicaciones
+
+### Listar publicaciones filtradas por categoria (200)
+GET {{base}}/publicaciones?categoriaId=1
+
+### Obtener una publicacion por id (200)
+GET {{base}}/publicaciones/1
+
+### Obtener una publicacion que no existe (404)
+GET {{base}}/publicaciones/999
+
+### Crear una publicacion (201)
+POST {{base}}/publicaciones
+Content-Type: application/json
+
+{
+    "titulo": "Bicicleta MTB aro 29",
+    "descripcion": "Bicicleta en buen estado, ideal para ciclismo urbano",
+    "precio": 850,
+    "categoriaId": 1,
+    "ubicacion": "Cusco"
+}
+
+### Crear una publicacion sin titulo (400)
+POST {{base}}/publicaciones
+Content-Type: application/json
+
+{
+    "descripcion": "Publicacion de prueba sin titulo",
+    "precio": 100
+}
+
+### Crear una publicacion con precio invalido (400)
+POST {{base}}/publicaciones
+Content-Type: application/json
+
+{
+    "titulo": "Publicacion con precio invalido",
+    "precio": -50
+}
+
+### Crear una publicacion con categoria inexistente (400)
+POST {{base}}/publicaciones
+Content-Type: application/json
+
+{
+    "titulo": "Publicacion con categoria inexistente",
+    "precio": 200,
+    "categoriaId": 999
+}
+
+### Actualizar parcialmente una publicacion (200)
+PUT {{base}}/publicaciones/1
+Content-Type: application/json
+
+{
+    "precio": 4300,
+    "ubicacion": "Lima Norte"
+}
+
+### Actualizar el titulo de una publicacion a un valor vacio (400)
+PUT {{base}}/publicaciones/1
+Content-Type: application/json
+
+{
+    "titulo": "   "
+}
+
+### Actualizar una publicacion que no existe (404)
+PUT {{base}}/publicaciones/999
+Content-Type: application/json
+
+{
+    "precio": 500
+}
+
+### Eliminar una publicacion (200)
+DELETE {{base}}/publicaciones/3
+
+### Eliminar una publicacion que ya no existe (404)
+DELETE {{base}}/publicaciones/3
